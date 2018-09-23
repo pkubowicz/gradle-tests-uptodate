@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}
+
+test {
+    outputs.dir "$buildDir/foo"
+    doFirst { delete "$buildDir/foo" }
+}
+
+task barJar(type: Jar, dependsOn: test) {
+    from buildDir
+    include "$buildDir/bar"
+}
+
+task("baz123")
